@@ -36,7 +36,7 @@
                 <div class="card-footer">
                     <div class="stats">
                         <i class="material-icons">library_books</i>
-                        მონაცემთა ბაზის <a href="/redwine/page/posts">ნახვა</a>
+                        პოსტების <a href="/redwine/page/posts">ნახვა</a>
                     </div>
                 </div>
             </div>
