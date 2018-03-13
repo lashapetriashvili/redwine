@@ -110,20 +110,6 @@ class CustomPagesRowsTableSeeder extends Seeder
             'position'      => 6,
         ])->save();
 
-        $news = self::customRow('posts', 'excerpt');
-        $news->fill([
-            'type'          => 'tinytextarea (editor)',
-            'display_name'  => 'მოკლე აღწერა',
-            'column_browse' => 1,
-            'column_read'   => 1,
-            'column_edit'   => 1,
-            'column_add'    => 1,
-            'details'       => '{
-	"required": true
-}',
-            'position'      => 7,
-        ])->save();
-
         $news = self::customRow('posts', 'image');
         $news->fill([
             'type'          => 'image',
