@@ -22,9 +22,9 @@ use Redwine\Database\Seeders\RolesTableSeeder;
 use Redwine\Database\Migrations\MenusTableMigrate;
 use Redwine\Database\Seeders\MenusTableSeeder;
 use Redwine\Database\Migrations\PagesTableMigrate;
-use Redwine\Database\Migrations\PagesTableSeeder;
+use Redwine\Database\Seeders\PagesTableSeeder;
 use Redwine\Database\Migrations\PostsTableMigrate;
-use Redwine\Database\Migrations\PostsTableSeeder;
+use Redwine\Database\Seeders\PostsTableSeeder;
 use Redwine\Database\Migrations\PermissionsTableMigrate;
 use Redwine\Database\Seeders\PermissionsTableSeeder;
 
