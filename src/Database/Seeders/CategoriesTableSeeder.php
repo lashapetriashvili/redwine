@@ -12,7 +12,7 @@ class CategoriesTableSeeder extends Seeder
      */
     public static function run()
     {
-        $news = Categories::firstOrNew(['name' => 'red wine']);
+        $news = Categories::firstOrNew(['name' => 'წითელი ღვინო']);
         $news->fill([
             'slug' => 'red_wine'
         ])->save();
