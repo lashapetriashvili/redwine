@@ -4,7 +4,7 @@ Created By [Web house Studio](https://webhouse.ge/#home)
 
 ვებგვერდი & დოკუმენტაცია: [https://redwine.webhouse.ge](https://redwine.webhouse.ge/)
 
-facebook:[ https://www.facebook.com/redwineAdminPanel](https://www.facebook.com/redwineAdminPanel/)
+facebook:[ https://www.facebook.com/redwineAdminPanel](https://www.facebook.com/RedwineLaravelAdminPanel/)
 
 # რა არის Redwine?
 
