@@ -458,7 +458,7 @@ class CustomPagesRowsTableSeeder extends Seeder
         $news->fill([
             'type'          => 'textarea (editor)',
             'display_name'  => 'აღწერა',
-            'column_browse' => 0,
+            'column_browse' => 1,
             'column_read'   => 1,
             'column_edit'   => 1,
             'column_add'    => 1,
