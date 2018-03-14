@@ -14,7 +14,7 @@
 
     <div class="card" data-border="purple" style="">
         <div class="card-header card-icon" data-background-color="purple">
-            <i class="fa fa-cloud" aria-hidden="true"></i>
+            <i class="fa fa-bars" aria-hidden="true"></i>
         </div>
         <div class="card-content table-responsive">
             <table class="table table-hover">
