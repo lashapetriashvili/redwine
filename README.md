@@ -1,5 +1,5 @@
 <p align="center">
-	<img alt="Redwine" src="https://github.com/redwineprojects/redwine/blob/master/src/Assets/img/logo%203%20(200X200).png">
+	<img alt="Redwine" src="https://redwine.webhouse.ge/assets/img/logo%202%20(200X200).png">
 </p>
 
 <p align="center">
