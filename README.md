@@ -3,7 +3,6 @@
 </p>
 
 <p align="center">
-	<a href="https://packagist.org/packages/redwine/redwine"><img src="https://poser.pugx.org/redwine/redwine/v/stable" alt="Latest Stable Version"></a>
 	<a href="https://packagist.org/packages/redwine/redwine"><img src="https://poser.pugx.org/redwine/redwine/downloads" alt="Total downloads"></a>
 	<a href="https://packagist.org/packages/redwine/redwine"><img src="https://poser.pugx.org/redwine/redwine/d/monthly" alt="Monthly downloads"></a>
 	<a href="https://packagist.org/packages/redwine/redwine"><img src="https://poser.pugx.org/redwine/redwine/license" alt="License"></a>
