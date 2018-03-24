@@ -1,0 +1,46 @@
+{
+	"name":"redwine/redwine",
+	"description":"A Larave Admin Package",
+	"keywords": ["admin", "package", "admin package", "laravel package", "framework", "laravel"],
+	"license":"MIT",
+	"homepage": "https://redwine.webhouse.ge",
+	"version": "1.0.0",
+	"author": [
+		{
+			"name":"Lasha Petriashvili",
+			"email":"redwine@webhouse.ge"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Redwine\\": "src/"
+		},
+		"files": [
+			"src/Functions.php"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Redwine\\Tests\\": "tests/"
+		}
+	},
+	"require": {
+		"php": ">=7.0.0"
+	},
+	"require-dev": {
+        "phpunit/phpcov": "~3.0|dev-master",
+        "phpunit/phpunit": "~5.7.14|~6.1",
+        "laravel/browser-kit-testing": "~1.0.0|~2.0.0",
+        "orchestra/testbench": "~3.0"
+    },
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Redwine\\RedwinePackageServiceProvider"
+			],
+			"aliases": {
+				"Redwine": "Redwine\\Facades\\Redwine"
+			}
+		}
+	}
+}
