@@ -19,11 +19,6 @@
 			"src/Functions.php"
 		]
 	},
-	"autoload-dev": {
-		"psr-4": {
-			"Redwine\\Tests\\": "tests/"
-		}
-	},
 	"require": {
 		"php": ">=7.0.0"
 	},
