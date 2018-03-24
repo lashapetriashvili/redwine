@@ -4,6 +4,7 @@
 	"keywords": ["admin", "package", "admin package", "laravel package", "framework", "laravel"],
 	"license":"MIT",
 	"homepage": "https://redwine.webhouse.ge",
+	"version": "1.0.1",
 	"author": [
 		{
 			"name":"Lasha Petriashvili",
