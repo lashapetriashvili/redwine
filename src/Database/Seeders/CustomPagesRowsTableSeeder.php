@@ -359,6 +359,20 @@ class CustomPagesRowsTableSeeder extends Seeder
             'position'      => 5,
         ])->save();
 
+        $news = self::customRow('users', 'lang');
+        $news->fill([
+            'type'          => 'select',
+            'display_name'  => '{lang}',
+            'column_browse' => 1,
+            'column_read'   => 1,
+            'column_edit'   => 1,
+            'column_add'    => 1,
+            'details'       => '{
+	"language": "redwine"
+}',
+            'position'      => 6,
+        ])->save();
+
         $news = self::customRow('users', 'remember_token');
         $news->fill([
             'type'          => null,
@@ -368,7 +382,7 @@ class CustomPagesRowsTableSeeder extends Seeder
             'column_edit'   => 0,
             'column_add'    => 0,
             'details'       => null,
-            'position'      => 6,
+            'position'      => 7,
         ])->save();
 
         $news = self::customRow('users', 'created_at');
@@ -380,7 +394,7 @@ class CustomPagesRowsTableSeeder extends Seeder
             'column_edit'   => 0,
             'column_add'    => 0,
             'details'       => null,
-            'position'      => 7,
+            'position'      => 8,
         ])->save();
 
         $news = self::customRow('users', 'updated_at');
@@ -392,7 +406,7 @@ class CustomPagesRowsTableSeeder extends Seeder
             'column_edit'   => 0,
             'column_add'    => 0,
             'details'       => null,
-            'position'      => 8,
+            'position'      => 9,
         ])->save();
 
         $news = self::customRow('pages', 'id');
