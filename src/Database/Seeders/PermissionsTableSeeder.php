@@ -23,6 +23,7 @@ class PermissionsTableSeeder extends Seeder
         Permission::generateFor('menu');
         Permission::generateFor('pages');
         Permission::generateFor('settings');
+        Permission::generateFor('language');
 
         $role = Role::where('name', 'admin')->firstOrFail();
 
