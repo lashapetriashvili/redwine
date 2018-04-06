@@ -118,23 +118,3 @@ php artisan serv
 ```
 
 Redwine-ზე შესასვლელი ლინკი არის [localhost:8000/redwine](http://localhost:8000/redwine) ან [127.0.0.1:8000/redwine](http://127.0.0.1:8000/redwine) 
-
-# Redwine-ის განახლება
-
-##### 1. განაახლე ყველა package
-```
-composer update
-```
-
-##### 2. განაახლე Redwine
-```
-php artisan redwine:update
-```
-
-##### 3. გილოცავ შენ წარმატებით განაახლე Redwine 
-
-> E-mail: admin@admin.com
->
-> Password: 123
-
-Redwine-ზე შესასვლელი ლინკი არის [localhost:8000/redwine](http://localhost:8000/redwine) ან [127.0.0.1:8000/redwine](http://127.0.0.1:8000/redwine) 
