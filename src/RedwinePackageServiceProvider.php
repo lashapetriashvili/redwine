@@ -8,7 +8,7 @@ class RedwinePackageServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->bind("Redwine", function () {
+        $this->app->bind('Redwine', function () {
             return new Redwine;
         });
     }
@@ -23,11 +23,11 @@ class RedwinePackageServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/RedwineLang' => resource_path('redwineLang'),
         ], 'public_uploads');
-        $this->loadRoutesFrom(__DIR__ . "/Routes/web.php");
-        $this->loadMigrationsFrom(__DIR__ . "/Database/Migration");
-        $this->loadViewsFrom(__DIR__ . "/Resources/Views", "redwine");
+        $this->loadRoutesFrom(__DIR__ . '/Routes/web.php');
+        $this->loadMigrationsFrom(__DIR__ . '/Database/Migration');
+        $this->loadViewsFrom(__DIR__ . '/Resources/Views', 'redwine');
         $this->publishes([
-            __DIR__ . "/Assets" => public_path("vendor/redwine")
+            __DIR__ . '/Assets' => public_path('vendor/redwine')
         ], "public");
         
         if (app()->version() >= 5.4) {
