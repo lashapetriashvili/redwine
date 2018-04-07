@@ -24,7 +24,7 @@ class RedwinePackageServiceProvider extends ServiceProvider
             __DIR__.'/RedwineLang' => resource_path('redwineLang'),
         ], 'public_uploads');
         $this->loadRoutesFrom(__DIR__ . '/Routes/web.php');
-        $this->loadMigrationsFrom(__DIR__ . '/Database/Migration');
+        $this->loadMigrationsFrom(__DIR__ . '/Database/Migrations');
         $this->loadViewsFrom(__DIR__ . '/Resources/Views', 'redwine');
         $this->publishes([
             __DIR__ . '/Assets' => public_path('vendor/redwine')
