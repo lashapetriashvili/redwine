@@ -15,7 +15,7 @@ class SettingsTableSeeder extends Seeder
         $news = Settings::firstOrNew(['name' => 'version']);
         $news->fill([
             'display_name' => 'redwine version',
-            'value'        => '1.1.0',
+            'value'        => '1.1.1',
         ])->save();
     }
 }
