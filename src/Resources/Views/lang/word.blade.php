@@ -32,7 +32,7 @@
                             <tr>
                                 <td>{{ ++$number }}</td>
                                 <td>{{ $key }}</td>
-                                <td>{{ basename($word) }}</td>
+                                <td>{{ $word }}</td>
                                 <td>Redwine::lang(&#x27;{{ $directorie }}.{{ $file }}.{{ $key }}&#x27;)</td>
                                 <td>
                                     @if(Redwine::bladePermissionFail('edit_language'))
