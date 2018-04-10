@@ -88,7 +88,7 @@
                         </nav>
                         <p class="copyright pull-right">
                             &copy; {{ date("Y") }}
-                            <a href="https://www.redwine.webhouse.ge" target="_blank">Created By Web House Studio</a> v{{ redwine::setting('version') }}
+                            Copyright All Rights Reserved v{{ redwine::setting('version') }}
                         </p>
                     </div>
                 </footer>
