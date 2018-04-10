@@ -10,28 +10,71 @@ use Illuminate\Support\Facades\File;
 
 class Redwine
 {
+    /**
+     * The array of models.
+     *
+     * @var array
+     */
     protected $models = [
         "Permission" => Permission::class,
         "Role"       => Role::class
     ];
+
+    /**
+     * Check if permission loaded.
+     *
+     * @var bool
+     */
     protected $permissionsLoaded = false;
+
+    /**
+     * The array of permissions.
+     *
+     * @var array
+     */
     protected $permissions = [];
 
+    /**
+     * Controller namespace.
+     * 
+     * @return string
+     */
     public function controllerNamespace()
     {
-        return "Redwine\\Http\\Controllers";
+        return 'Redwine\\Http\\Controllers';
     }
 
+    /**
+     * Get model from $models array.
+     *
+     * @param  string  $name
+     * 
+     * @return model
+     */
     public function modelClass($name)
     {
         return $this->models[$name];
     }
 
+    /**
+     * Get model.
+     *
+     * @param  string  $name
+     * 
+     * @return $name
+     */
     public function model($name)
     {
         return new $name;
     }
 
+    /**
+     * Try if permission exist.
+     *
+     * @param  string  $permission
+     * 
+     * @return \Exception|bool
+     */
     public function try($permission)
     {
         $this->loadPermissions();
@@ -50,6 +93,13 @@ class Redwine
         return true;
     }
 
+    /**
+     * Check if permission fail.
+     *
+     * @param  string  $permission
+     * 
+     * @return \Exception|bool
+     */
     public function permissionFail($permission)
     {
         if (!$this->try($permission)) {
@@ -59,6 +109,13 @@ class Redwine
         return true;
     }
 
+    /**
+     * Try if permission exist for blade tamplate engine.
+     *
+     * @param  string  $permission
+     * 
+     * @return bool
+     */
     public function bladeTry($permission)
     {
         $this->loadPermissions();
@@ -77,6 +134,13 @@ class Redwine
         return true;
     }
 
+    /**
+     * Check if permission fail for blade tamplate engine.
+     *
+     * @param  string  $permission
+     * 
+     * @return bool
+     */
     public function bladePermissionFail($permission)
     {
         if (!$this->bladeTry($permission)) {
@@ -86,6 +150,14 @@ class Redwine
         return true;
     }
 
+    /**
+     * Try if permission exist.
+     *
+     * @param  string  $permission
+     * @param  int  $statusCode
+     * 
+     * @return abort|bool
+     */
     public function permissionAbort($permission, $statusCode = 403)
     {
         if (!$this->try($permission)) {
@@ -95,6 +167,11 @@ class Redwine
         return true;
     }
 
+    /**
+     * Upload image in uploads/images folder.
+     * 
+     * @return string
+     */
     public function imageUpload($request, $name)
     {
         if ($request->hasFile('image')) {
@@ -117,6 +194,11 @@ class Redwine
         }
     }
 
+    /**
+     * Load permissions.
+     * 
+     * @return void
+     */
     protected function loadPermissions()
     {
         if (!$this->permissionsLoaded) {
@@ -126,6 +208,13 @@ class Redwine
         }
     }
 
+    /**
+     * Get user.
+     *
+     * @param  int  $id|null
+     * 
+     * @return int
+     */
     protected function getUser($id = null)
     {
         if (is_null($id)) {
@@ -143,6 +232,13 @@ class Redwine
         return $this->users[$id];
     }
 
+    /**
+     * Get value from settigs table.
+     *
+     * @param  string  $name
+     * 
+     * @return string
+     */
     public function setting($name)
     {
         return $this->model('Redwine\Models\Settings')
@@ -151,6 +247,14 @@ class Redwine
             ->first()['value'];
     }
 
+    /**
+     * Get menu.
+     *
+     * @param  string  $name
+     * @param  array  $detal
+     * 
+     * @return html
+     */
     public function menu($name, $detal = [])
     {
         $html = \App::call('Redwine\Http\Controllers\MenuController@menu', ['name' => $name, 'detal' => $detal]);
@@ -158,6 +262,13 @@ class Redwine
         return $html;
     }
 
+    /**
+     * Get url.
+     *
+     * @param  int  $number
+     * 
+     * @return mixed
+     */
     public function url($number = 0)
     {
         $url = '';
@@ -170,6 +281,15 @@ class Redwine
         return $url;
     }
 
+    /**
+     * Get Redwine language.
+     *
+     * @param  string  $fullText
+     * @param  array  $array
+     * @param  string  $lang
+     * 
+     * @return mixed
+     */
     public function lang($arg, $array = [], $lang = '')
     {
         $name   = explode('.', $arg);
@@ -192,6 +312,14 @@ class Redwine
         }
     }
 
+    /**
+     * Change Redwine language argument.
+     *
+     * @param  string  $fullText
+     * @param  array  $array
+     * 
+     * @return mixed
+     */ 
     protected function langArg($fullText, $array)
     {
         $find = strchr($fullText, '{');
@@ -211,9 +339,39 @@ class Redwine
         }
     }
 
+    /**
+     * Redwine language method for authorized users.
+     *
+     * @param  string  $arg
+     * @param  array  $array
+     * @param  bool  $uppercase
+     * 
+     * @return mixed
+     */ 
     public function userLang($arg, $array = [], $uppercase = false)
     {
         $text = $this->lang($arg, $array, \Auth::user()->lang);
         return $uppercase ? strtoupper($text) : $text;
+    }
+
+    /**
+     * Redwine plugin method.
+     *
+     * @param  string  $arg
+     * 
+     * @return object|null
+     */ 
+    public function plugin($arg)
+    {
+        $name       = explode('.', $arg);
+        $folder     = isset($name[0]) ? $name[0] : '';
+        $controller = isset($name[1]) ? $name[1] : '';
+        $file       = isset($name[2]) ? $name[2] : '';
+        $method     = isset($name[3]) ? $name[3] : '';
+
+        $namespace = '\\App\\RedwinePlugins\\' . $folder . '\\' . $controller . '\\' . $file;
+        $namespace = class_exists($namespace) ? new $namespace : false;
+
+        return $namespace ? $namespace->{$method}() : '';
     }
 }
