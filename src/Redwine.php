@@ -369,7 +369,7 @@ class Redwine
         $file       = isset($name[2]) ? $name[2] : '';
         $method     = isset($name[3]) ? $name[3] : '';
 
-        $namespace = '\\App\\RedwinePlugins\\' . $folder . '\\' . $controller . '\\' . $file;
+        $namespace = '\App\RedwinePlugins\\' . $folder . '\\' . $controller . '\\' . $file;
         $namespace = class_exists($namespace) ? new $namespace : false;
 
         return $namespace ? $namespace->{$method}() : '';
