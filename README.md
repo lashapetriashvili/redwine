@@ -1,5 +1,5 @@
 <p align="center">
-	<img alt="Redwine" src="https://redwine.webhouse.ge/assets/img/logo%202%20(200X200).png">
+	<img alt="Redwine" src="https://i.ibb.co/YbVsX04/logo-2-200-X200.png">
 </p>
 
 <p align="center">
