@@ -1,13 +1,13 @@
 {
 	"name":"redwine/redwine",
-	"description":"A Larave Admin Package",
-	"keywords": ["admin", "package", "admin package", "laravel package", "framework", "laravel"],
+	"description":"A Larave Plugin Management",
+	"keywords": ["admin", "package", "admin package", "laravel package", "framework", "laravel", "modules", "management", "plugin"],
 	"license":"MIT",
-	"homepage": "https://redwine.webhouse.ge",
+	"homepage": "http://redwine.ge",
 	"author": [
 		{
 			"name":"Lasha Petriashvili",
-			"email":"redwine@webhouse.ge"
+			"email":"lasha@redwine.ge"
 		}
 	],
 	"autoload": {

@@ -1,5 +1,6 @@
 <?php
 namespace Redwine;
+
 use illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
 
@@ -28,10 +29,23 @@ class RedwinePackageServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register package's namespaces.
+     */
+    protected function registerNamespaces()
+    {
+        $configPath = __DIR__ . '/../config/config.php';
+
+        $this->mergeConfigFrom($configPath, 'redwine');
+        $this->publishes([
+            $configPath => config_path('redwine.php'),
+        ], 'config');
+    }
+
+    /**
      * Register the commands accessible from the Console.
      */
     private function registerConsoleCommands()
     {
-
+        $this->commands(Commands\PluginMakeCommand::class);
     }
 }
