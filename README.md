@@ -11,10 +11,6 @@
 
 # Redwine - Laravel Admin Panel
 
-პროექტი შეიქმნა [Web house Studio](https://webhouse.ge/#home)-ს დახმარებით
-
-ვებგვერდი & დოკუმენტაცია: [https://redwine.webhouse.ge](https://redwine.webhouse.ge/)
-
 facebook:[ https://www.facebook.com/RedwineLaravelAdminPanel](https://www.facebook.com/RedwineLaravelAdminPanel/)
 
 # რა არის Redwine?
