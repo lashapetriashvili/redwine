@@ -26,12 +26,14 @@ class RedwinePackageServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->registerConsoleCommands();
         }
+
+        $this->registerConfigFile();
     }
 
     /**
-     * Register package's namespaces.
+     * Register Config File
      */
-    protected function registerNamespaces()
+    protected function registerConfigFile()
     {
         $configPath = __DIR__ . '/../config/config.php';
 

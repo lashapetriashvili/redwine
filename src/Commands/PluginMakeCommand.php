@@ -2,10 +2,11 @@
 
 namespace Redwine\Commands;
 
-use Illuminate\Console\Command;
-use Nwidart\Modules\Generators\ModuleGenerator;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
+use Redwine\Creator\PluginCreator;
+use Redwine\Handler\FileHandler;
+use Illuminate\Console\Command;
+use Redwine\Facades\Redwine;
 
 class PluginMakeCommand extends Command
 {
@@ -14,7 +15,7 @@ class PluginMakeCommand extends Command
      *
      * @var string
      */
-    protected $name = 'redwine:make';
+    protected $name = 'redwine:make {name}';
 
     /**
      * The console command description.
@@ -24,24 +25,18 @@ class PluginMakeCommand extends Command
     protected $description = 'Create a new redwine plugin.';
 
     /**
-     * Execute the console command.
+     * Check If Plugin Name Is Empty
+     *
+     * @param $pluginName
      */
-    public function handle()
+    protected function checkPluginName($pluginName)
     {
-        $names = $this->argument('name');
+        if (empty($pluginName)) {
+            // Output Error Message
+            $this->error('Plugin Name(s) is Empty!');
 
-        dd($names);
-
-//        foreach ($names as $name) {
-//            with(new ModuleGenerator($name))
-//                ->setFilesystem($this->laravel['files'])
-//                ->setModule($this->laravel['modules'])
-//                ->setConfig($this->laravel['config'])
-//                ->setConsole($this)
-//                ->setForce($this->option('force'))
-//                ->setPlain($this->option('plain'))
-//                ->generate();
-//        }
+            return true;
+        }
     }
 
     /**
@@ -56,11 +51,26 @@ class PluginMakeCommand extends Command
         ];
     }
 
-    protected function getOptions()
+    /**
+     * Execute the console command.
+     */
+    public function handle()
     {
-        return [
-            ['plain', 'p', InputOption::VALUE_NONE, 'Generate a plain redwine (without some resources).'],
-            ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when the plugin already exists.'],
-        ];
+        // Get Plugin name(s)
+        $names = $this->argument('name');
+        // Check If Plugin Name Is Empty
+        if ($this->checkPluginName($names)) return;
+        // Get Plugin Type
+        $type = $this->choice('Choose Plugin Type', Redwine::getPluginType(), Redwine::getDefaultPluginTypeIndex());
+        // Loop Each Plugin Name
+        foreach ($names as $name) {
+            // Create Plugin
+            (new PluginCreator)->setFileHandler(new FileHandler)
+                ->setConfig(config('redwine'))
+                ->setPluginName($name)
+                ->setPluginType($type)
+                ->setConsole($this)
+                ->create();
+        }
     }
 }
