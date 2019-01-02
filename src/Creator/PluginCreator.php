@@ -43,6 +43,20 @@ class PluginCreator
     protected $pluginType;
 
     /**
+     * Create a Plain Plugin
+     *
+     * @var bool
+     */
+    protected $plain;
+
+    /**
+    * Force Status.
+    *
+    * @var boo
+    */
+    protected $force;
+
+    /**
      * Get Plugin Name
      *
      * @return string
@@ -103,16 +117,6 @@ class PluginCreator
     }
 
     /**
-     * Get Console
-     *
-     * @return console
-     */
-    public function getConsole()
-    {
-        return $this->console;
-    }
-
-    /**
      * Set Console
      *
      * @param $console
@@ -144,6 +148,32 @@ class PluginCreator
     public function setPluginType($type)
     {
         $this->pluginType = $type;
+
+        return $this;
+    }
+
+    /**
+     * set Force
+     *
+     * @param $force
+     * @return $this
+     */
+    public function setForce($force)
+    {
+        $this->force = $force;
+
+        return $this;
+    }
+
+    /**
+     * set Plain
+     *
+     * @param $plain
+     * @return $this
+     */
+    public function setPlain($plain)
+    {
+        $this->plain = $plain;
 
         return $this;
     }

@@ -12,30 +12,21 @@ class Redwine
     public $folderName = 'Redwine';
 
     /**
-     * Plugin Type
-     *
-     * @var array
-     */
-    public $pluginType = [
-        'Test Type',
-        'Test Type 2'
-    ];
-
-    /**
-     * Default Plugin Type Index
-     *
-     * @var int
-     */
-    public $defaultPluginTypeIndex = 0;
-
-    /**
      * Get Plugin Type
      *
      * @return array
      */
     public function getPluginType()
     {
-        return $this->pluginType;
+        // First Plugin Type
+        $pluginType = ['Create Everything'];
+        // Loop Each Plugin Type
+        foreach (config('redwine.plugin_type') as $type) {
+            // Push Array To string
+            array_push($pluginType, '["' . implode('", "', $type) . '"]');
+        }
+        // Return All Plugin Types
+        return $pluginType;
     }
 
     /**
@@ -45,7 +36,7 @@ class Redwine
      */
     public function getDefaultPluginTypeIndex()
     {
-        return $this->defaultPluginTypeIndex;
+        return config('redwine.default_plugin_type_index');
     }
 
     /**
