@@ -13,7 +13,7 @@ return [
     */
 
     'plugin_type' => [
-        ['config', 'command'],
+        ['confi1g', 'comman1d', 'zaza'],
     ],
 
     /*

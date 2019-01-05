@@ -1,11 +1,11 @@
 <?php
 
-namespace Redwine\Handler;
+namespace Redwine\Helper;
 
 use Illuminate\Support\Facades\File;
 use Redwine\Facades\Redwine;
 
-class FileHandler
+class PluginChecker
 {
     /**
      * All Plugin Info
@@ -91,13 +91,14 @@ class FileHandler
     }
 
     /**
-     * Check Plugin
+     * Check Plugin Info
      *
      * @param $pluginName
+     * @return bool
      */
-    public function checkPlugin($pluginName)
+    public function checkPluginInfo($pluginName)
     {
-        return in_array($pluginName, $this->getAllPluginName(true)) ? true : false;
+        return file_exists(Redwine::getPluginFolderPath($pluginName)) ? true : false;
     }
 
     /**
@@ -109,5 +110,16 @@ class FileHandler
     public function checkPluginDirectory($pluginName)
     {
         return file_exists(Redwine::getPluginFolderPath($pluginName)) ? true : false;
+    }
+
+    /**
+     * Check Plugin
+     *
+     * @param $pluginName
+     * @return bool
+     */
+    public function check($pluginName)
+    {
+        return $this->checkPluginInfo($pluginName) || $this->checkPluginDirectory($pluginName) ? true : false;
     }
 }

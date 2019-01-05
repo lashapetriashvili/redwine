@@ -5,9 +5,7 @@ namespace Redwine\Commands;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Redwine\Creator\PluginCreator;
-use Redwine\Handler\FileHandler;
 use Illuminate\Console\Command;
-use Redwine\Facades\Redwine;
 
 class PluginMakeCommand extends Command
 {
@@ -33,7 +31,7 @@ class PluginMakeCommand extends Command
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::IS_ARRAY, 'The names of plugins will be created.'],
+            ['name', InputArgument::OPTIONAL, 'The name of plugin .'],
         ];
     }
 
@@ -53,13 +51,13 @@ class PluginMakeCommand extends Command
     /**
      * Check If Plugin Name Is Empty
      *
-     * @param $pluginName
+     * @return bool
      */
-    protected function checkPluginName($pluginName)
+    protected function checkPluginName()
     {
-        if (empty($pluginName)) {
+        if (empty($this->argument('name'))) {
             // Output Error Message
-            $this->error('Plugin Name(s) is Empty!');
+            $this->error('Plugin Name is Empty!');
 
             return true;
         }
@@ -70,23 +68,13 @@ class PluginMakeCommand extends Command
      */
     public function handle()
     {
-        // Get Plugin name(s)
-        $names = $this->argument('name');
         // Check If Plugin Name Is Empty
-        if ($this->checkPluginName($names)) return;
-        // Get Plugin Type
-        $type = $this->choice('Choose Plugin Types', Redwine::getPluginType(), Redwine::getDefaultPluginTypeIndex());
-        // Loop Each Plugin Name
-        foreach ($names as $name) {
-            // Create Plugin
-            (new PluginCreator)->setFileHandler(new FileHandler)
-                ->setConfig(config('redwine'))
-                ->setForce($this->option('force'))
-                ->setPlain($this->option('plain'))
-                ->setPluginName($name)
-                ->setPluginType($type)
-                ->setConsole($this)
-                ->create();
-        }
+        if ($this->checkPluginName()) return;
+        // Create Plugin
+        (new PluginCreator)->setPluginName($this->argument('name'))
+            ->setForce($this->option('force'))
+            ->setPlain($this->option('plain'))
+            ->setConsole($this)
+            ->create();
     }
 }

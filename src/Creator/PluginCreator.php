@@ -2,6 +2,8 @@
 
 namespace Redwine\Creator;
 
+use Redwine\Helper\PluginChecker;
+use Redwine\Helper\PluginType;
 use Redwine\Facades\Redwine;
 use Illuminate\Support\Str;
 
@@ -15,18 +17,11 @@ class PluginCreator
     protected $pluginName;
 
     /**
-     * Redwine Config (config/redwine.php)
+     * Plugin Type
      *
-     * @var array
+     * @var int
      */
-    protected $config;
-
-    /**
-     *  Plugin File Handler
-     *
-     * @var class
-     */
-    protected $fileHandler;
+    protected $pluginType;
 
     /**
      * The laravel console
@@ -34,13 +29,6 @@ class PluginCreator
      * @var console
      */
     protected $console;
-
-    /**
-     * Plugin Type
-     *
-     * @var int
-     */
-    protected $pluginType;
 
     /**
      * Create a Plain Plugin
@@ -57,16 +45,6 @@ class PluginCreator
     protected $force;
 
     /**
-     * Get Plugin Name
-     *
-     * @return string
-     */
-    public function getPluginName()
-    {
-        return Str::studly($this->pluginName);
-    }
-
-    /**
      * Set Plugin Name
      *
      * @param $pluginName
@@ -80,43 +58,6 @@ class PluginCreator
     }
 
     /**
-     * get Config
-     *
-     * @param $getValue
-     * @return mixed
-     */
-    public function getConfig($getValue)
-    {
-        return $this->config[$getValue];
-    }
-
-    /**
-     * Set Config
-     *
-     * @param $config
-     * @return $this
-     */
-    public function setConfig($config)
-    {
-        $this->config = $config;
-
-        return $this;
-    }
-
-    /**
-     * Set File Management
-     *
-     * @param $fileManagement
-     * @return $this
-     */
-    public function setFileHandler($fileHandler)
-    {
-        $this->fileHandler = $fileHandler;
-
-        return $this;
-    }
-
-    /**
      * Set Console
      *
      * @param $console
@@ -125,29 +66,6 @@ class PluginCreator
     public function setConsole($console)
     {
         $this->console = $console;
-
-        return $this;
-    }
-
-    /**
-     * Get Plugin Type
-     *
-     * @return false|int|string
-     */
-    public function getPluginType()
-    {
-        return array_search($this->pluginType, Redwine::getPluginType());
-    }
-
-    /**
-     * Set Plugin Type
-     *
-     * @param $type
-     * @return $this
-     */
-    public function setPluginType($type)
-    {
-        $this->pluginType = $type;
 
         return $this;
     }
@@ -179,15 +97,54 @@ class PluginCreator
     }
 
     /**
+     * Get Plugin Name
+     *
+     * @return string
+     */
+    public function getPluginName()
+    {
+        return Str::studly($this->pluginName);
+    }
+
+    /**
+     * Get Plugin Type
+     *
+     * @return |null
+     */
+    public function getPluginType()
+    {
+        // Get Selected Type Index
+        $getSelectedTypeIndex = array_search($this->pluginType, Redwine::getPluginType());
+        // Return Plugin Type
+        return $getSelectedTypeIndex
+            ? Redwine::getConfigValue('plugin_type')[--$getSelectedTypeIndex]
+            : Redwine::getAllFolderStructure();
+    }
+
+    /**
+     * Choose Plugin Types For New Plugin
+     */
+    protected function chooseNewPluginType()
+    {
+        // Get Plugin Type
+        $this->pluginType = $this->console->choice(
+            'Choose Plugin Types',
+            PluginType::getPluginType(),
+            PluginType::getDefaultPluginTypeIndex()
+        );
+        // Output Info
+        $this->console->info('Creating ' . $this->getPluginName() . ' Plugin');
+    }
+
+    /**
      * Check If Plugin Already Exist
      *
      * @return bool
      */
     public function checkPlugin()
     {
-        if ($this->fileHandler->checkPlugin($this->getPluginName())
-            || $this->fileHandler->checkPluginDirectory($this->getPluginName())
-        ) {
+        // Check Plugin
+        if ((new PluginChecker)->check($this->getPluginName())) {
             // Output Error Message
             $this->console->error($this->getPluginName() . ' Already Exist');
 
@@ -202,7 +159,13 @@ class PluginCreator
     {
         // Check If Plugin Already Exist
         if ($this->checkPlugin()) return;
-        // Output Info
-        $this->console->info('Creating ' . $this->getPluginName() . ' Plugin');
+        // Choose Plugin Types For New Plugin
+        $this->chooseNewPluginType();
+        // Create Plugin Directories
+        (new DirectoryCreator)->setPluginName($this->getPluginName())
+            ->setPluginType($this->getPluginType())
+            ->setConsole($this->console)
+            ->setForce($this->force)
+            ->createDirectory();
     }
 }

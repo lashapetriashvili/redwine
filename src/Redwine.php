@@ -12,46 +12,53 @@ class Redwine
     public $folderName = 'Redwine';
 
     /**
-     * Get Plugin Type
+     * Config Name
+     *
+     * @var string
+     */
+    public $configName = 'redwine';
+
+    /**
+     * Get All Folder Structure
      *
      * @return array
      */
-    public function getPluginType()
+    public function getAllFolderStructure()
     {
-        // First Plugin Type
-        $pluginType = ['Create Everything'];
-        // Loop Each Plugin Type
-        foreach (config('redwine.plugin_type') as $type) {
-            // Push Array To string
-            array_push($pluginType, '["' . implode('", "', $type) . '"]');
+        // Folder Structure Empty Array
+        $folderStructureArray = [];
+        // Get Each Folder Structure From Config
+        foreach (config($this->configName . '.folder_structure') as $key => $folder) {
+            array_push($folderStructureArray, $key);
         }
-        // Return All Plugin Types
-        return $pluginType;
-    }
-
-    /**
-     * Get Default Plugin Type Index
-     *
-     * @return int
-     */
-    public function getDefaultPluginTypeIndex()
-    {
-        return config('redwine.default_plugin_type_index');
+        // Return Folder Structure In Array
+        return $folderStructureArray;
     }
 
     /**
      * Get Plugin Folder Path
      *
-     * @param null $url
+     * @param null $path
      * @return string
      */
-    public function getPluginFolderPath($url = null)
+    public function getPluginFolderPath($path = null)
     {
         // Folder Path
         $folderPath = base_path($this->folderName);
-        // Check If Exist Extra URl
-        return is_null($url)
+        // Check If Exist Extra Path
+        return is_null($path)
             ? $folderPath
-            : $folderPath . '\\' . $url;
+            : $folderPath . '\\' . $path;
+    }
+
+    /**
+     * get Config Value
+     *
+     * @param $path
+     * @return \Illuminate\Config\Repository|mixed
+     */
+    public function getConfigValue($path)
+    {
+        return config($this->configName . '.' . $path);
     }
 }
