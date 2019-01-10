@@ -114,7 +114,7 @@ class PluginCreator
     public function getPluginType()
     {
         // Get Selected Type Index
-        $getSelectedTypeIndex = array_search($this->pluginType, Redwine::getPluginType());
+        $getSelectedTypeIndex = array_search($this->pluginType, PluginType::getPluginType());
         // Return Plugin Type
         return $getSelectedTypeIndex
             ? Redwine::getConfigValue('plugin_type')[--$getSelectedTypeIndex]
@@ -167,5 +167,11 @@ class PluginCreator
             ->setConsole($this->console)
             ->setForce($this->force)
             ->createDirectory();
+
+        // Create Plugin Files
+        (new FileCreator)->setPluginName($this->getPluginName())
+            ->setPluginType($this->getPluginType())
+            ->setConsole($this->console)
+            ->create();
     }
 }

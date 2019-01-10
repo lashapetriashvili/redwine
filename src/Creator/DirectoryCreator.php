@@ -2,6 +2,7 @@
 
 namespace Redwine\Creator;
 
+use Redwine\Helper\Directory;
 use Redwine\Facades\Redwine;
 
 class DirectoryCreator
@@ -107,9 +108,7 @@ class DirectoryCreator
      */
     protected function makeDirectory($path, $mode = 0755, $recursive = false)
     {
-        return $this->force
-            ? @mkdir($path, $mode, $recursive)
-            : mkdir($path, $mode, $recursive);
+        return Directory::makeDirectory($path, $mode, $recursive, $this->force);
     }
 
     /**
@@ -118,7 +117,7 @@ class DirectoryCreator
     public function createDirectory()
     {
         foreach ($this->pluginType as $type) {
-            // CHeck IF This Type Exist In config
+            // Check IF This Type Exist In config
             if (Redwine::getConfigValue('folder_structure.' . $type . '.path')) {
                 // Get Plugin Directory Path
                 $path = $this->getPluginDirectoryPath(Redwine::getConfigValue('folder_structure.' . $type . '.path'));

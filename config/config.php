@@ -13,7 +13,7 @@ return [
     */
 
     'plugin_type' => [
-        ['confi1g', 'comman1d', 'zaza'],
+        ['config', 'command', 'routes', 'migration'],
     ],
 
     /*
@@ -50,6 +50,25 @@ return [
         'assets'        => ['path' => 'Resources/assets'],
         'lang'          => ['path' => 'Resources/lang'],
         'views'         => ['path' => 'Resources/views'],
+        'routes'        => [
+            'path'  => 'Routes',
+            'files' => [
+                [
+                    'name' => 'web.php',
+                    'stub' => [
+                        'path'    => base_path() . '/vendor/redwine/redwine/src/stubs/routes/web.stub',
+                        'replace' => ['LOWER_NAME', 'STUDLY_NAME']
+                    ]
+                ],
+                [
+                    'api.php',
+                    [
+                        'path' => base_path() . '/vendor/redwine/redwine/src/stubs/routes/api.stub',
+                        ['LOWER_NAME', 'STUDLY_NAME']
+                    ]
+                ]
+            ]
+        ],
         'test'          => ['path' => 'Tests'],
         'event'         => ['path' => 'Events'],
         'listener'      => ['path' => 'Listeners'],
