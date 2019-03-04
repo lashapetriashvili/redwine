@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class CustomPageRow extends Model
 {
     protected $guarded = [];
+    
 }
