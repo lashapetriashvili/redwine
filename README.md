@@ -11,8 +11,6 @@
 
 # Redwine - Laravel Admin Panel
 
-facebook:[ https://www.facebook.com/RedwineLaravelAdminPanel](https://www.facebook.com/RedwineLaravelAdminPanel/)
-
 # რა არის Redwine?
 
 #### Redwine არის Larevel Admin Panel რომლის დახმარებითაც თქვენ შეძლებთ მარტივად:
